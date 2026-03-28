@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-container">
+        <header>
+            <h1>Book Your Appointments</h1>
+            <p>Select a date and click multiple slots to book them together</p>
+        </header>
+
+        <main>
+            <div class="date-picker-section">
+                <label for="date-picker">Select Date:</label>
+                <input type="date" id="date-picker" />
+            </div>
+
+            <div id="loader" class="loader hidden"></div>
+
+            <div id="status-message" class="status-message hidden">
+            </div>
+
+            <div id="slots-container" class="slots-grid">
+                <!-- Slots will be populated here -->
+            </div>
+
+            <!-- Floating action bar for multi-selection -->
+            <div id="action-bar" class="action-bar hidden">
+                <button id="book-selected-btn" class="btn btn-primary shadow-pulse">
+                    Review <span id="selected-count">1</span> Selection(s)
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal for booking confirmation -->
+    <div id="booking-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <h2>Confirm Bookings</h2>
+            <p>Do you want to secure the following times?</p>
+            <ul id="modal-time-list" class="modal-list"></ul>
+            <div class="modal-actions">
+                <button id="cancel-btn" class="btn btn-secondary">Cancel</button>
+                <button id="confirm-btn" class="btn btn-primary">Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
