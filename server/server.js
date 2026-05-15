@@ -51,8 +51,11 @@ app.get('/api/slots', async (req, res) => {
     const bookedMap = {};
     if (data) {
         data.forEach(row => {
-            bookedMap[row.slot_time] = row.is_booked;
+            // Normalize "2026-05-15T09:30:00+00:00" to "2026-05-15T09:30:00"
+            const isoKey = new Date(row.slot_time).toISOString().substring(0, 19);
+            bookedMap[isoKey] = row.is_booked;
         });
+        console.log(`Found ${data.length} booked slots for ${dateStr}`);
     }
 
     const result = allSlotsForDate.map(slot => ({
@@ -113,7 +116,12 @@ app.post('/api/slots/book', async (req, res) => {
     res.json({ success: true, message: 'All slots successfully booked via Supabase', slot_times });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running heavily on http://localhost:${PORT}`);
-});
+// Export the express app so Vercel can run it as a serverless function!
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running heavily on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;

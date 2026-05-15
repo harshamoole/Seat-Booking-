@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bookSelectedBtn = document.getElementById('book-selected-btn');
 
     let selectedSlots = []; // Array of slot_time strings
-    const API_URL = 'http://localhost:3000/api';
+    const API_URL = '/api';
 
     // Set today's date as default
     const today = new Date().toISOString().split('T')[0];

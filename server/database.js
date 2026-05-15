@@ -11,6 +11,6 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-console.log('Supabase client initialized successfully using environment variables.');
+console.log(`Supabase client initialized for project: ${supabaseUrl}`);
 
 module.exports = supabase;
